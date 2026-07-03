@@ -6,7 +6,7 @@ export const siteConfig = {
   phone: "1 563 328 4723",
   phoneHref: "tel:+15633284723",
   email: "info@b-b-soft.com",
-  url: "https://www.b-b-soft.com",
+  url: "https://steno.github.io/b-b-soft",
 };
 
 export const navLinks = [
