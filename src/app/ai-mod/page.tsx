@@ -46,7 +46,7 @@ export default function AIModPage() {
             <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/20 text-accent-light">
               <SparklesIcon className="h-6 w-6" />
             </span>
-            <p className="text-sm font-semibold uppercase tracking-wider text-accent-light">
+            <p className="text-sm font-semibold uppercase tracking-wider text-eyebrow">
               Artificial Intelligence Module
             </p>
           </div>

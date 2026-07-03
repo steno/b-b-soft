@@ -14,6 +14,7 @@
   --highlight: #f59e0b;
   --navy: #0c1929;
   --navy-light: #1e3a5f;
+  --eyebrow: goldenrod;
 }
 
 @theme inline {
@@ -30,6 +31,7 @@
   --color-highlight: var(--highlight);
   --color-navy: var(--navy);
   --color-navy-light: var(--navy-light);
+  --color-eyebrow: var(--eyebrow);
   --font-sans: var(--font-jakarta);
   --font-display: var(--font-instrument);
   --font-family-display: var(--font-instrument), Georgia, serif;

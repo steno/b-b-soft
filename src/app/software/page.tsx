@@ -15,7 +15,7 @@ export default function SoftwarePage() {
     <>
       <section className="gradient-mesh pt-32 pb-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent-light">
+          <p className="text-sm font-semibold uppercase tracking-wider text-eyebrow">
             Our Software
           </p>
           <h1 className="mt-3 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">

@@ -36,11 +36,7 @@ export function SectionHeader({
   return (
     <div className={`mb-14 max-w-3xl ${centered ? "mx-auto text-center" : ""}`}>
       {eyebrow && (
-        <p
-          className={`mb-3 text-sm font-semibold uppercase tracking-wider ${
-            light ? "text-accent-light" : "text-accent"
-          }`}
-        >
+        <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-eyebrow">
           {eyebrow}
         </p>
       )}
