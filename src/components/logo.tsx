@@ -8,7 +8,7 @@ type LogoProps = {
 export function Logo({ className = "h-9 w-auto", priority = false }: LogoProps) {
   return (
     <Image
-      src="/bbsoftlogo.png"
+      src="/bbsoftlogo1.png"
       alt="BB Soft"
       width={220}
       height={48}
