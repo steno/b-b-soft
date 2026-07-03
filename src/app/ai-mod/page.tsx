@@ -43,7 +43,7 @@ export default function AIModPage() {
         <div className="absolute right-0 top-1/2 h-96 w-96 -translate-y-1/2 translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/20 text-accent-light">
+            <span className="eyebrow-icon flex h-12 w-12 items-center justify-center rounded-2xl">
               <SparklesIcon className="h-6 w-6" />
             </span>
             <p className="text-sm font-semibold uppercase tracking-wider text-eyebrow">

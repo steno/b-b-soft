@@ -112,3 +112,8 @@ body {
   backdrop-filter: blur(16px) saturate(120%);
   -webkit-backdrop-filter: blur(16px) saturate(120%);
 }
+
+.eyebrow-icon {
+  color: var(--eyebrow);
+  background: color-mix(in srgb, var(--eyebrow) 18%, transparent);
+}

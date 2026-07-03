@@ -16,8 +16,8 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMS41Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50" />
         <div className={`relative ${siteContainerClass} py-32 lg:py-40`}>
           <div className="max-w-3xl">
-            <p className="animate-fade-up mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-sm text-accent-light">
-              <SparklesIcon className="h-4 w-4" />
+            <p className="animate-fade-up mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-sm text-eyebrow">
+              <SparklesIcon className="h-4 w-4 text-eyebrow" />
               Now with AI-powered operations
             </p>
             <h1 className="animate-fade-up animation-delay-100 font-display text-5xl font-normal leading-tight text-white sm:text-6xl lg:text-7xl">
@@ -105,7 +105,7 @@ export default function HomePage() {
             <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/20 text-accent-light">
+                  <div className="eyebrow-icon flex h-12 w-12 items-center justify-center rounded-xl">
                     <SparklesIcon className="h-6 w-6" />
                   </div>
                   <div>
