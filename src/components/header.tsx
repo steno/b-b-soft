@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { navLinks } from "@/lib/content";
+import { siteContainerClass } from "@/lib/layout";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 
@@ -65,9 +66,9 @@ export function Header() {
       <header
         className={`fixed inset-x-0 top-0 z-[250] ${mobileOpen ? "" : "transition-colors duration-300"} ${headerSurface}`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <Link href="/" className="group flex items-center">
-            <Logo priority className="h-9 sm:h-10" />
+        <div className={`${siteContainerClass} flex items-center justify-between py-3 lg:py-4`}>
+          <Link href="/" className="shrink-0">
+            <Logo priority className="h-12 w-auto sm:h-14 lg:h-16" />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
@@ -150,7 +151,7 @@ export function Header() {
             style={{ backgroundColor: "#ffffff" }}
           >
             <nav
-              className="flex min-h-dvh flex-col gap-1 overflow-y-auto px-6 pb-8 pt-[88px]"
+              className={`${siteContainerClass} flex min-h-dvh flex-col gap-1 overflow-y-auto pb-8 pt-24`}
               aria-label="Mobile"
             >
               {navLinks.map((link) => {

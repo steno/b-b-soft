@@ -5,15 +5,15 @@ type LogoProps = {
   priority?: boolean;
 };
 
-export function Logo({ className = "h-9 w-auto", priority = false }: LogoProps) {
+export function Logo({ className = "h-12 w-auto", priority = false }: LogoProps) {
   return (
     <Image
       src="/bbsoftlogo1.png"
       alt="BB Soft"
-      width={220}
-      height={48}
+      width={320}
+      height={72}
       priority={priority}
-      className={`object-contain ${className}`}
+      className={`object-contain object-left ${className}`}
     />
   );
 }
