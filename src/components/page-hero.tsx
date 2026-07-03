@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { MobileHeroMotion } from "@/components/mobile-hero-motion";
 import { siteContainerClass } from "@/lib/layout";
 
 type PageHeroProps = {
@@ -18,10 +19,11 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <section className="relative overflow-hidden gradient-mesh pt-32 pb-20">
+      <MobileHeroMotion className="z-0" />
       {decorative && (
-        <div className="absolute right-0 top-1/2 h-96 w-96 -translate-y-1/2 translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
+        <div className="absolute right-0 top-1/2 z-0 h-96 w-96 -translate-y-1/2 translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
       )}
-      <div className={`relative ${siteContainerClass} text-center`}>
+      <div className={`relative z-10 ${siteContainerClass} text-center`}>
         {eyebrowIcon ? (
           <div className="flex items-center justify-center gap-3">
             {eyebrowIcon}

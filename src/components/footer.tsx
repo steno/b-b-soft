@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/logo";
+import { MobileHeroMotion } from "@/components/mobile-hero-motion";
 import { siteConfig } from "@/lib/content";
 import { siteConfigEs } from "@/lib/content-es";
 import {
@@ -23,7 +24,8 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-navy text-white">
       <div className="pointer-events-none absolute inset-0 gradient-mesh opacity-60" aria-hidden="true" />
-      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <MobileHeroMotion className="z-0 opacity-70" />
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <Link href={localizedHref("/", locale)} className="inline-flex">
