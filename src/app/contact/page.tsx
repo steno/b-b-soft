@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact-form";
+import { PageHero } from "@/components/page-hero";
 import { Section } from "@/components/section";
 import { siteConfig } from "@/lib/content";
 
@@ -12,20 +13,11 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="gradient-mesh pt-32 pb-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-eyebrow">
-            Contact
-          </p>
-          <h1 className="mt-3 font-display text-4xl font-normal text-white sm:text-5xl">
-            So, why are you waiting?
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-slate-300 leading-relaxed">
-            If you would like to know more about our product and services or
-            schedule an online demonstration, we&apos;d love to hear from you.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Contact"
+        title="So, why are you waiting?"
+        description="If you would like to know more about our product and services or schedule an online demonstration, we'd love to hear from you."
+      />
 
       <Section>
         <div className="grid gap-12 lg:grid-cols-5">

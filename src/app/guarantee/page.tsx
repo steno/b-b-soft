@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CTABanner } from "@/components/cta-banner";
+import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader } from "@/components/section";
 import { Button } from "@/components/ui/button";
 
@@ -32,21 +33,16 @@ const guaranteeSteps = [
 export default function GuaranteePage() {
   return (
     <>
-      <section className="gradient-mesh pt-32 pb-20">
-        <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-eyebrow">
-            Our BB Soft Guarantee
-          </p>
-          <h1 className="mt-3 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
+      <PageHero
+        eyebrow="Our BB Soft Guarantee"
+        title={
+          <>
             We put our money{" "}
             <span className="italic text-accent-light">where our mouth is</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-300 leading-relaxed">
-            We are so confident in our software, we make this guarantee without
-            hesitation. BB Soft is that good.
-          </p>
-        </div>
-      </section>
+          </>
+        }
+        description="We are so confident in our software, we make this guarantee without hesitation. BB Soft is that good."
+      />
 
       <Section>
         <div className="mx-auto max-w-4xl">

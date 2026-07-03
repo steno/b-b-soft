@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CTABanner } from "@/components/cta-banner";
+import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader } from "@/components/section";
 import { SparklesIcon } from "@/components/icons";
 
@@ -39,28 +40,22 @@ const aiBenefits = [
 export default function AIModPage() {
   return (
     <>
-      <section className="relative overflow-hidden gradient-mesh pt-32 pb-20">
-        <div className="absolute right-0 top-1/2 h-96 w-96 -translate-y-1/2 translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <span className="eyebrow-icon flex h-12 w-12 items-center justify-center rounded-2xl">
-              <SparklesIcon className="h-6 w-6" />
-            </span>
-            <p className="text-sm font-semibold uppercase tracking-wider text-eyebrow">
-              Artificial Intelligence Module
-            </p>
-          </div>
-          <h1 className="mt-6 max-w-4xl font-display text-4xl font-normal leading-tight text-white sm:text-5xl lg:text-6xl">
+      <PageHero
+        decorative
+        eyebrow="Artificial Intelligence Module"
+        eyebrowIcon={
+          <span className="eyebrow-icon flex h-12 w-12 items-center justify-center rounded-2xl">
+            <SparklesIcon className="h-6 w-6" />
+          </span>
+        }
+        title={
+          <>
             Your operation, in a{" "}
             <span className="italic text-accent-light">whole new universe</span>
-          </h1>
-          <p className="mt-6 max-w-3xl text-lg text-slate-300 leading-relaxed">
-            BB Soft was already the most efficient, accurate software in the
-            industry. With AI-Mod, the speed and efficiencies you achieve will
-            be staggering.
-          </p>
-        </div>
-      </section>
+          </>
+        }
+        description="BB Soft was already the most efficient, accurate software in the industry. With AI-Mod, the speed and efficiencies you achieve will be staggering."
+      />
 
       <Section>
         <SectionHeader

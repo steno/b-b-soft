@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CTABanner } from "@/components/cta-banner";
 import { FeatureCard } from "@/components/feature-card";
+import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader } from "@/components/section";
 import { pricingHighlights, softwareFeatures } from "@/lib/content";
 
@@ -13,21 +14,16 @@ export const metadata: Metadata = {
 export default function SoftwarePage() {
   return (
     <>
-      <section className="gradient-mesh pt-32 pb-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-eyebrow">
-            Our Software
-          </p>
-          <h1 className="mt-3 font-display text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
+      <PageHero
+        eyebrow="Our Software"
+        title={
+          <>
             Simple to use.{" "}
             <span className="italic text-accent-light">Feature rich.</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-slate-300 leading-relaxed">
-            BB Soft handles every aspect of your DMC or tour operation — from
-            bookings and logistics to costing, billing, and inventory control.
-          </p>
-        </div>
-      </section>
+          </>
+        }
+        description="BB Soft handles every aspect of your DMC or tour operation — from bookings and logistics to costing, billing, and inventory control."
+      />
 
       <Section className="bg-surface">
         <SectionHeader

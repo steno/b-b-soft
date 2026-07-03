@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader } from "@/components/section";
 
 export const metadata: Metadata = {
@@ -33,16 +34,10 @@ const principles = [
 export default function EthicsPage() {
   return (
     <>
-      <section className="gradient-mesh pt-32 pb-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-eyebrow">
-            Business Ethics
-          </p>
-          <h1 className="mt-3 max-w-4xl font-display text-4xl font-normal text-white sm:text-5xl">
-            Anti-Corruption &amp; Business Ethics Policy
-          </h1>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Business Ethics"
+        title="Anti-Corruption & Business Ethics Policy"
+      />
 
       <Section>
         <div className="mx-auto max-w-3xl">
