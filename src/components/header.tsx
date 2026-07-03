@@ -57,7 +57,7 @@ export function Header() {
   }, [mobileOpen]);
 
   const headerSurface = mobileOpen
-    ? "glass-dark border-b border-white/10 shadow-lg shadow-navy/30"
+    ? "menu-overlay border-b border-white/10 shadow-lg"
     : scrolled
       ? "bg-white shadow-sm border-b border-border lg:bg-white/90 lg:backdrop-blur-lg"
       : "bg-transparent";
@@ -150,7 +150,7 @@ export function Header() {
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="glass-dark lg:hidden fixed inset-0 z-[240]"
+            className="menu-overlay lg:hidden fixed inset-0 z-[240]"
           >
             <nav
               className={`${siteContainerClass} flex min-h-dvh flex-col gap-1 overflow-y-auto pb-8 pt-24`}
@@ -165,15 +165,15 @@ export function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={`rounded-xl px-4 py-3 text-lg font-medium transition-colors ${
                       active
-                        ? "bg-white/15 text-white"
-                        : "text-white/85 hover:bg-white/10 hover:text-white"
+                        ? "bg-white/15 text-accent-light"
+                        : "text-white/90 hover:bg-white/10 hover:text-white"
                     }`}
                   >
                     {link.label}
                   </Link>
                 );
               })}
-              <div className="mt-4 border-t border-white/15 pt-4">
+              <div className="mt-4 border-t border-white/10 pt-4">
                 <Button href="/contact" variant="primary" className="w-full">
                   Request Demo
                 </Button>
