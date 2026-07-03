@@ -7,8 +7,21 @@ type VantaNetBackgroundProps = {
   fallbackClassName?: string;
 };
 
+declare global {
+  interface Window {
+    THREE?: object;
+    VANTA?: {
+      NET: (options: Record<string, unknown>) => { destroy: () => void };
+    };
+  }
+}
+
 const NAVY = 0x0c1929;
 const TEAL = 0x14b8a6;
+const THREE_CDN =
+  "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
+const VANTA_NET_CDN =
+  "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js";
 
 const variantConfig = {
   hero: {
@@ -18,6 +31,8 @@ const variantConfig = {
     showDots: true,
     mouseControls: true,
     touchControls: true,
+    backgroundAlpha: 0.35,
+    opacity: 0.85,
   },
   footer: {
     points: 10,
@@ -26,8 +41,27 @@ const variantConfig = {
     showDots: true,
     mouseControls: false,
     touchControls: false,
+    backgroundAlpha: 0.45,
+    opacity: 0.9,
   },
 } as const;
+
+function loadScript(src: string, id: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (document.getElementById(id)) {
+      resolve();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = id;
+    script.src = src;
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error(`Failed to load ${src}`));
+    document.head.appendChild(script);
+  });
+}
 
 function shouldUseFallback() {
   if (typeof window === "undefined") return true;
@@ -36,7 +70,6 @@ function shouldUseFallback() {
     return true;
   }
 
-  // Skip only on touch-primary devices (phones), not narrow desktop windows.
   if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
     return true;
   }
@@ -63,19 +96,26 @@ export function VantaNetBackground({
     if (!container || shouldUseFallback()) return;
 
     let active = true;
-    const config = variantConfig[variant];
+    const { opacity, backgroundAlpha, ...config } = variantConfig[variant];
 
     async function initVanta() {
       try {
-        const THREE = await import("three");
-        const NET = (await import("vanta/dist/vanta.net.min")).default;
+        await loadScript(THREE_CDN, "bbsoft-three");
+        await loadScript(VANTA_NET_CDN, "bbsoft-vanta-net");
 
-        if (!active || !containerRef.current) return;
+        if (
+          !active ||
+          !containerRef.current ||
+          !window.THREE ||
+          !window.VANTA?.NET
+        ) {
+          return;
+        }
 
         effectRef.current?.destroy();
-        effectRef.current = NET({
+        effectRef.current = window.VANTA.NET({
           el: containerRef.current,
-          THREE,
+          THREE: window.THREE,
           gyroControls: false,
           minHeight: 200,
           minWidth: 200,
@@ -83,8 +123,11 @@ export function VantaNetBackground({
           scaleMobile: 1,
           color: TEAL,
           backgroundColor: NAVY,
+          backgroundAlpha,
           ...config,
         });
+
+        containerRef.current.style.opacity = String(opacity);
       } catch (error) {
         console.error("Vanta NET failed to initialize:", error);
       }
