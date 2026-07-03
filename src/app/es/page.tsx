@@ -28,6 +28,11 @@ export default function SpanishHomePage() {
       <section className="relative flex min-h-[90vh] items-center overflow-hidden">
         <VantaNetBackground variant="hero" />
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMS41Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50" />
+        <div className="mobile-hero-visible-motion absolute inset-0 z-[2] md:hidden" aria-hidden="true">
+          <span className="mobile-hero-blob mobile-hero-blob-a" />
+          <span className="mobile-hero-blob mobile-hero-blob-b" />
+          <span className="mobile-hero-blob mobile-hero-blob-c" />
+        </div>
         <div className={`relative z-10 ${siteContainerClass} py-32 lg:py-40`}>
           <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14 xl:gap-20">
             <div className="max-w-3xl">
