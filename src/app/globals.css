@@ -97,6 +97,54 @@ body {
     radial-gradient(at 10% 90%, rgba(20, 184, 166, 0.15) 0px, transparent 50%);
 }
 
+@keyframes mobile-gradient-drift {
+  0% {
+    background-position:
+      0% 0%,
+      100% 0%,
+      60% 100%,
+      0% 100%;
+  }
+  50% {
+    background-position:
+      12% 8%,
+      88% 14%,
+      52% 88%,
+      10% 82%;
+  }
+  100% {
+    background-position:
+      0% 0%,
+      100% 0%,
+      60% 100%,
+      0% 100%;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) and (prefers-reduced-motion: no-preference) {
+  .mobile-gradient-motion {
+    background-size:
+      150% 150%,
+      160% 160%,
+      140% 140%,
+      155% 155%;
+    animation: mobile-gradient-drift 18s ease-in-out infinite;
+  }
+
+  .mobile-gradient-motion::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 22% 36%, rgba(45, 212, 191, 0.2) 0 1px, transparent 2px),
+      radial-gradient(circle at 72% 28%, rgba(245, 158, 11, 0.12) 0 1px, transparent 2px),
+      radial-gradient(circle at 54% 72%, rgba(20, 184, 166, 0.16) 0 1px, transparent 2px);
+    background-size: 120px 120px, 150px 150px, 180px 180px;
+    opacity: 0.65;
+    animation: mobile-gradient-drift 24s ease-in-out infinite reverse;
+  }
+}
+
 .glass {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
