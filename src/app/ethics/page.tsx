@@ -68,7 +68,7 @@ export default function EthicsPage() {
         </div>
       </Section>
 
-      <Section className="bg-slate-50">
+      <Section className="bg-surface">
         <SectionHeader
           eyebrow="Our Principles"
           title="Integrity in every interaction"
@@ -78,7 +78,7 @@ export default function EthicsPage() {
           {principles.map((principle) => (
             <div
               key={principle.title}
-              className="rounded-2xl border border-border bg-card p-6 shadow-sm"
+              className="rounded-2xl border border-slate-300/90 bg-white p-6 shadow-md shadow-slate-400/15"
             >
               <h3 className="text-lg font-semibold text-navy">{principle.title}</h3>
               <p className="mt-2 text-muted text-sm leading-relaxed">

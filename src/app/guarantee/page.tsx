@@ -64,7 +64,7 @@ export default function GuaranteePage() {
         </div>
       </Section>
 
-      <Section className="bg-slate-50">
+      <Section className="bg-surface">
         <SectionHeader
           eyebrow="How It Works"
           title="Three simple steps to guaranteed ROI"

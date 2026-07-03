@@ -73,7 +73,7 @@ export default function AIModPage() {
           {aiBenefits.map((benefit) => (
             <div
               key={benefit.title}
-              className="flex gap-5 rounded-2xl border border-border bg-card p-6 shadow-sm"
+              className="flex gap-5 rounded-2xl border border-slate-300/90 bg-white p-6 shadow-md shadow-slate-400/15"
             >
               <span className="text-3xl" role="img" aria-hidden="true">
                 {benefit.icon}

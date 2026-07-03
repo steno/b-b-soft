@@ -51,7 +51,7 @@ export default function HomePage() {
       </section>
 
       {/* Features overview */}
-      <Section>
+      <Section className="bg-surface">
         <SectionHeader
           eyebrow="Why BB Soft"
           title="Built for DMCs and tour operators who demand reliability"
@@ -138,7 +138,7 @@ export default function HomePage() {
       </Section>
 
       {/* Pricing highlights */}
-      <Section className="bg-slate-50">
+      <Section className="bg-surface">
         <SectionHeader
           eyebrow="Transparent Pricing"
           title="No hidden fees. No surprises."
@@ -149,7 +149,7 @@ export default function HomePage() {
           {pricingHighlights.map((item) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-border bg-card p-8 text-center shadow-sm"
+              className="rounded-2xl border border-slate-300/90 bg-white p-8 text-center shadow-md shadow-slate-400/15"
             >
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                 <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">

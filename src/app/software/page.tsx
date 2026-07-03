@@ -29,7 +29,7 @@ export default function SoftwarePage() {
         </div>
       </section>
 
-      <Section>
+      <Section className="bg-surface">
         <SectionHeader
           eyebrow="Core Capabilities"
           title="Everything your operation needs"
@@ -42,7 +42,7 @@ export default function SoftwarePage() {
         </div>
       </Section>
 
-      <Section className="bg-slate-50">
+      <Section className="bg-background">
         <SectionHeader
           eyebrow="Pricing Philosophy"
           title="One server. One monthly fee. That's it."
@@ -53,7 +53,7 @@ export default function SoftwarePage() {
           {pricingHighlights.map((item, i) => (
             <div
               key={item.title}
-              className="relative rounded-2xl border border-border bg-card p-8 shadow-sm"
+              className="relative rounded-2xl border border-slate-300/90 bg-white p-8 shadow-md shadow-slate-400/15"
             >
               <span className="absolute -top-3 left-6 rounded-full bg-accent px-3 py-0.5 text-xs font-bold text-white">
                 {String(i + 1).padStart(2, "0")}
