@@ -2,24 +2,27 @@ import type { Metadata } from "next";
 import { absoluteAssetUrl, assetPath } from "@/lib/asset-path";
 import { siteConfig } from "@/lib/content";
 
-const ICON_PATH = "/icon.png";
-const ICON_SIZE = 354;
+const FAVICON_PATH = "/star.png";
+const FAVICON_SIZE = 190;
+const SOCIAL_IMAGE_PATH = "/icon.png";
+const SOCIAL_IMAGE_SIZE = 354;
 
 const socialImage = {
-  url: absoluteAssetUrl(ICON_PATH),
-  width: ICON_SIZE,
-  height: ICON_SIZE,
+  url: absoluteAssetUrl(SOCIAL_IMAGE_PATH),
+  width: SOCIAL_IMAGE_SIZE,
+  height: SOCIAL_IMAGE_SIZE,
   alt: `${siteConfig.name} logo`,
   type: "image/png",
 };
 
 export const siteIcons: NonNullable<Metadata["icons"]> = {
   icon: [
-    { url: assetPath("/favicon.ico"), sizes: "any" },
-    { url: assetPath(ICON_PATH), type: "image/png", sizes: `${ICON_SIZE}x${ICON_SIZE}` },
+    { url: assetPath(FAVICON_PATH), type: "image/png", sizes: `${FAVICON_SIZE}x${FAVICON_SIZE}` },
   ],
-  apple: [{ url: assetPath(ICON_PATH), type: "image/png", sizes: `${ICON_SIZE}x${ICON_SIZE}` }],
-  shortcut: assetPath(ICON_PATH),
+  apple: [
+    { url: assetPath(FAVICON_PATH), type: "image/png", sizes: `${FAVICON_SIZE}x${FAVICON_SIZE}` },
+  ],
+  shortcut: assetPath(FAVICON_PATH),
 };
 
 export function buildOpenGraph(
