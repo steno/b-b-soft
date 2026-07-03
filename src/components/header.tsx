@@ -54,16 +54,15 @@ export function Header() {
     };
   }, [mobileOpen]);
 
-  const headerSurface = mobileOpen
-    ? "bg-white shadow-sm border-b border-border"
-    : scrolled
-      ? "bg-white/90 backdrop-blur-lg shadow-sm border-b border-border"
-      : "bg-transparent";
+  // On mobile, always use solid white when scrolled — backdrop-blur breaks the menu overlay.
+  const headerSurface = mobileOpen || scrolled
+    ? "bg-white shadow-sm border-b border-border lg:bg-white/90 lg:backdrop-blur-lg"
+    : "bg-transparent";
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-[250] transition-colors duration-300 ${headerSurface}`}
+        className={`fixed inset-x-0 top-0 z-[250] ${mobileOpen ? "" : "transition-colors duration-300"} ${headerSurface}`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <Link href="/" className="group flex items-center gap-3">
@@ -161,11 +160,11 @@ export function Header() {
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="lg:hidden fixed inset-0 z-[240] min-h-dvh overflow-y-auto overscroll-contain bg-white"
+            className="lg:hidden fixed inset-0 z-[240] bg-white"
             style={{ backgroundColor: "#ffffff" }}
           >
             <nav
-              className="flex flex-col gap-1 px-6 pb-8 pt-[88px]"
+              className="flex min-h-dvh flex-col gap-1 overflow-y-auto px-6 pb-8 pt-[88px]"
               aria-label="Mobile"
             >
               {navLinks.map((link) => {
