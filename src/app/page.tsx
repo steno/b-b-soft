@@ -4,8 +4,10 @@ import { FeatureCard } from "@/components/feature-card";
 import { Section, SectionHeader } from "@/components/section";
 import { SparklesIcon } from "@/components/icons";
 import { homeStats, pricingHighlights, softwareFeatures, siteConfig } from "@/lib/content";
+import { assetPath } from "@/lib/asset-path";
 import { siteContainerClass } from "@/lib/layout";
 import { VantaNetBackground } from "@/components/vanta-net-background";
+import Image from "next/image";
 
 export default function HomePage() {
   const highlightFeatures = softwareFeatures.slice(0, 6);
@@ -16,32 +18,45 @@ export default function HomePage() {
       <section className="relative flex min-h-[90vh] items-center overflow-hidden">
         <VantaNetBackground variant="hero" />
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMS41Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50" />
-        <div className={`relative ${siteContainerClass} py-32 lg:py-40`}>
-          <div className="max-w-3xl">
-            <p className="animate-fade-up mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-sm text-eyebrow">
-              <SparklesIcon className="h-4 w-4 text-eyebrow" />
-              Now with AI-powered operations
-            </p>
-            <h1 className="animate-fade-up animation-delay-100 font-display text-5xl font-normal leading-tight text-white sm:text-6xl lg:text-7xl">
-              The software that makes you{" "}
-              <span className="text-accent-light italic">money</span>
-            </h1>
-            <p className="animate-fade-up animation-delay-200 mt-6 text-xl leading-relaxed text-slate-300">
-              {siteConfig.description} Simple to use, feature-rich, and built for
-              operations that never stop.
-            </p>
-            <div className="animate-fade-up animation-delay-300 mt-10 flex flex-col gap-4 sm:flex-row">
-              <Button href="/contact" variant="primary" size="lg">
-                Schedule a Demo
-              </Button>
-              <Button href="/software" variant="outline" size="lg">
-                See Features
-              </Button>
+        <div className={`relative z-10 ${siteContainerClass} py-32 lg:py-40`}>
+          <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-4 xl:gap-8">
+            <div className="max-w-3xl">
+              <p className="animate-fade-up mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-sm text-eyebrow">
+                <SparklesIcon className="h-4 w-4 text-eyebrow" />
+                Now with AI-powered operations
+              </p>
+              <h1 className="animate-fade-up animation-delay-100 font-display text-5xl font-normal leading-tight text-white sm:text-6xl lg:text-7xl">
+                The software that makes you{" "}
+                <span className="text-accent-light italic">money</span>
+              </h1>
+              <p className="animate-fade-up animation-delay-200 mt-6 text-xl leading-relaxed text-slate-300">
+                {siteConfig.description} Simple to use, feature-rich, and built for
+                operations that never stop.
+              </p>
+              <div className="animate-fade-up animation-delay-300 mt-10 flex flex-col gap-4 sm:flex-row">
+                <Button href="/contact" variant="primary" size="lg">
+                  Schedule a Demo
+                </Button>
+                <Button href="/software" variant="outline" size="lg">
+                  See Features
+                </Button>
+              </div>
+            </div>
+
+            <div className="animate-fade-up animation-delay-200 pointer-events-none flex justify-center lg:justify-end">
+              <Image
+                src={assetPath("/anna-glow.png")}
+                alt="Anna, BB Soft representative"
+                width={567}
+                height={832}
+                priority
+                className="h-56 w-auto object-contain object-bottom sm:h-72 md:h-80 lg:h-[min(68vh,720px)] xl:h-[min(72vh,832px)]"
+              />
             </div>
           </div>
 
           {/* Stats bar */}
-          <div className="animate-fade-up animation-delay-400 mt-20 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="animate-fade-up animation-delay-400 mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:mt-20">
             {homeStats.map((stat) => (
               <div key={stat.label} className="glass rounded-2xl px-6 py-5 text-center">
                 <p className="text-3xl font-bold text-white sm:text-4xl">{stat.value}</p>
