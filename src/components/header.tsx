@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { navLinks, siteConfig } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 
@@ -10,6 +11,11 @@ export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -29,13 +35,15 @@ export function Header() {
     };
   }, [mobileOpen]);
 
+  const headerSurface = mobileOpen
+    ? "bg-white shadow-sm border-b border-border"
+    : scrolled
+      ? "bg-white/90 backdrop-blur-lg shadow-sm border-b border-border"
+      : "bg-transparent";
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/90 backdrop-blur-lg shadow-sm border-b border-border"
-          : "bg-transparent"
-      }`}
+      className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${headerSurface}`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link href="/" className="group flex items-center gap-3">
@@ -109,33 +117,36 @@ export function Header() {
         </button>
       </div>
 
-      {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 top-[72px] z-40 bg-white">
-          <nav className="flex flex-col gap-1 p-6" aria-label="Mobile">
-            {navLinks.map((link) => {
-              const active = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`rounded-xl px-4 py-3 text-lg font-medium transition-colors ${
-                    active
-                      ? "bg-primary/10 text-primary"
-                      : "text-slate-700 hover:bg-slate-100"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-            <div className="mt-4 pt-4 border-t border-border">
-              <Button href="/contact" variant="primary" className="w-full">
-                Request Demo
-              </Button>
-            </div>
-          </nav>
-        </div>
-      )}
+      {mounted &&
+        mobileOpen &&
+        createPortal(
+          <div className="lg:hidden fixed inset-0 top-[72px] z-[90] bg-white overflow-y-auto">
+            <nav className="flex flex-col gap-1 p-6" aria-label="Mobile">
+              {navLinks.map((link) => {
+                const active = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`rounded-xl px-4 py-3 text-lg font-medium transition-colors ${
+                      active
+                        ? "bg-primary/10 text-primary"
+                        : "text-slate-700 hover:bg-slate-100"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+              <div className="mt-4 border-t border-border pt-4">
+                <Button href="/contact" variant="primary" className="w-full">
+                  Request Demo
+                </Button>
+              </div>
+            </nav>
+          </div>,
+          document.body
+        )}
     </header>
   );
 }
