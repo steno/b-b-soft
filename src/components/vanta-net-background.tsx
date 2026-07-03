@@ -32,11 +32,23 @@ const variantConfig = {
 function shouldUseFallback() {
   if (typeof window === "undefined") return true;
 
-  return (
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-    window.matchMedia("(max-width: 767px)").matches ||
-    !window.WebGLRenderingContext
-  );
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return true;
+  }
+
+  // Skip only on touch-primary devices (phones), not narrow desktop windows.
+  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+    return true;
+  }
+
+  try {
+    const canvas = document.createElement("canvas");
+    return !(
+      canvas.getContext("webgl") || canvas.getContext("experimental-webgl")
+    );
+  } catch {
+    return true;
+  }
 }
 
 export function VantaNetBackground({
@@ -73,24 +85,27 @@ export function VantaNetBackground({
           backgroundColor: NAVY,
           ...config,
         });
-      } catch {
-        // Keep CSS fallback visible if WebGL or Vanta fails to load.
+      } catch (error) {
+        console.error("Vanta NET failed to initialize:", error);
       }
     }
 
-    initVanta();
+    const frame = requestAnimationFrame(() => {
+      initVanta();
+    });
 
     return () => {
       active = false;
+      cancelAnimationFrame(frame);
       effectRef.current?.destroy();
       effectRef.current = null;
     };
   }, [variant]);
 
   return (
-    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
       <div className={`absolute inset-0 ${fallbackClassName}`} />
-      <div ref={containerRef} className="absolute inset-0" />
+      <div ref={containerRef} className="absolute inset-0 z-[1]" />
     </div>
   );
 }
