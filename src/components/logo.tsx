@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { assetPath } from "@/lib/asset-path";
 
 type LogoProps = {
   className?: string;
@@ -8,7 +9,7 @@ type LogoProps = {
 export function Logo({ className = "h-12 w-auto", priority = false }: LogoProps) {
   return (
     <Image
-      src="/bblogo.png"
+      src={assetPath("/bblogo.png")}
       alt="BB Soft"
       width={320}
       height={72}

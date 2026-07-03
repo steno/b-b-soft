@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Instrument_Serif } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { siteConfig } from "@/lib/content";
+import { assetPath } from "@/lib/asset-path";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -31,11 +32,11 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     siteName: siteConfig.name,
     type: "website",
-    images: [{ url: "/bblogo.png", alt: "BB Soft" }],
+    images: [{ url: assetPath("/bblogo.png"), alt: "BB Soft" }],
   },
   icons: {
-    icon: "/bblogo.png",
-    apple: "/bblogo.png",
+    icon: assetPath("/bblogo.png"),
+    apple: assetPath("/bblogo.png"),
   },
 };
 
