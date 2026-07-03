@@ -5,11 +5,12 @@ export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/software", "/ai-mod", "/guarantee", "/ethics", "/contact"];
+  const spanishRoutes = routes.map((route) => `/es${route}`);
 
-  return routes.map((route) => ({
+  return [...routes, ...spanishRoutes].map((route) => ({
     url: `${siteConfig.url}${route}`,
     lastModified: new Date(),
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : 0.8,
+    changeFrequency: route === "" || route === "/es" ? "weekly" : "monthly",
+    priority: route === "" || route === "/es" ? 1 : 0.8,
   }));
 }

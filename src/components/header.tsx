@@ -4,13 +4,25 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { navLinks } from "@/lib/content";
+import {
+  getLocaleFromPathname,
+  languageSwitchHref,
+  localizedHref,
+  navLinksForLocale,
+  stripLocale,
+  uiText,
+} from "@/lib/i18n";
 import { siteContainerClass } from "@/lib/layout";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 
 export function Header() {
   const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
+  const basePathname = stripLocale(pathname);
+  const navLinks = navLinksForLocale(locale);
+  const text = uiText[locale];
+  const switchHref = languageSwitchHref(pathname);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -81,13 +93,13 @@ export function Header() {
         className={`fixed inset-x-0 top-0 z-[250] ${mobileOpen ? "" : "transition-colors duration-300"} ${headerSurface}`}
       >
         <div className={`${siteContainerClass} flex items-center justify-between py-3 lg:py-4`}>
-          <Link href="/" className="shrink-0">
+          <Link href={localizedHref("/", locale)} className="shrink-0">
             <Logo priority className="h-12 w-auto sm:h-14 lg:h-16" />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
             {navLinks.map((link) => {
-              const active = pathname === link.href;
+              const active = basePathname === link.baseHref;
               return (
                 <Link
                   key={link.href}
@@ -106,15 +118,25 @@ export function Header() {
                 </Link>
               );
             })}
+            <Link
+              href={switchHref}
+              className={`ml-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
+                scrolled
+                  ? "border-slate-300 text-slate-600 hover:bg-slate-100 hover:text-navy"
+                  : "border-white/25 text-white/80 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {text.switchLanguage}
+            </Link>
           </nav>
 
           <div className="hidden lg:block">
             <Button
-              href="/contact"
+              href={localizedHref("/contact", locale)}
               variant={scrolled ? "primary" : "secondary"}
               size="sm"
             >
-              Request Demo
+              {text.requestDemo}
             </Button>
           </div>
 
@@ -129,7 +151,7 @@ export function Header() {
             }`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-label={mobileOpen ? text.closeMenu : text.openMenu}
           >
             <svg
               className="h-6 w-6"
@@ -162,7 +184,7 @@ export function Header() {
           <div
             role="dialog"
             aria-modal="true"
-            aria-label="Mobile navigation"
+            aria-label={text.mobileNavigation}
             className="menu-overlay lg:hidden fixed inset-0 z-[240]"
           >
             <nav
@@ -170,7 +192,7 @@ export function Header() {
               aria-label="Mobile"
             >
               {navLinks.map((link) => {
-                const active = pathname === link.href;
+                const active = basePathname === link.baseHref;
                 return (
                   <Link
                     key={link.href}
@@ -186,14 +208,21 @@ export function Header() {
                   </Link>
                 );
               })}
+              <Link
+                href={switchHref}
+                onClick={closeMenuForNavigation}
+                className="rounded-xl px-4 py-3 text-lg font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                {text.switchLanguage}
+              </Link>
               <div className="mt-4 border-t border-white/10 pt-4">
                 <Button
-                  href="/contact"
+                  href={localizedHref("/contact", locale)}
                   variant="primary"
                   className="w-full"
                   onClick={closeMenuForNavigation}
                 >
-                  Request Demo
+                  {text.requestDemo}
                 </Button>
               </div>
             </nav>

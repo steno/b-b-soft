@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { siteConfig } from "@/lib/content";
 import { Button } from "@/components/ui/button";
+import { type Locale } from "@/lib/i18n";
 
 type FormData = {
   company: string;
@@ -12,7 +13,57 @@ type FormData = {
   message: string;
 };
 
-export function ContactForm() {
+const formText = {
+  en: {
+    company: "Company",
+    companyPlaceholder: "Your company name",
+    name: "Contact Name",
+    namePlaceholder: "Your full name",
+    email: "Email",
+    phone: "Phone",
+    message: "Message",
+    messagePlaceholder: "Tell us about your operation and what you'd like to see in a demo...",
+    submit: "Send Message",
+    thankYou: "Thank you!",
+    success: "Your email client should open shortly. If it doesn't, reach us directly at",
+    subject: "Demo Request from",
+    bodyLabels: {
+      company: "Company",
+      name: "Name",
+      email: "Email",
+      phone: "Phone",
+      message: "Message",
+    },
+  },
+  es: {
+    company: "Empresa",
+    companyPlaceholder: "Nombre de tu empresa",
+    name: "Nombre de contacto",
+    namePlaceholder: "Tu nombre completo",
+    email: "Email",
+    phone: "Teléfono",
+    message: "Mensaje",
+    messagePlaceholder: "Cuéntanos sobre tu operación y qué te gustaría ver en una demo...",
+    submit: "Enviar mensaje",
+    thankYou: "¡Gracias!",
+    success: "Tu cliente de correo debería abrirse pronto. Si no ocurre, escríbenos directamente a",
+    subject: "Solicitud de demo de",
+    bodyLabels: {
+      company: "Empresa",
+      name: "Nombre",
+      email: "Email",
+      phone: "Teléfono",
+      message: "Mensaje",
+    },
+  },
+} as const;
+
+type ContactFormProps = {
+  locale?: Locale;
+};
+
+export function ContactForm({ locale = "en" }: ContactFormProps) {
+  const text = formText[locale];
   const [form, setForm] = useState<FormData>({
     company: "",
     name: "",
@@ -24,9 +75,9 @@ export function ContactForm() {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const subject = encodeURIComponent(`Demo Request from ${form.company || form.name}`);
+    const subject = encodeURIComponent(`${text.subject} ${form.company || form.name}`);
     const body = encodeURIComponent(
-      `Company: ${form.company}\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`
+      `${text.bodyLabels.company}: ${form.company}\n${text.bodyLabels.name}: ${form.name}\n${text.bodyLabels.email}: ${form.email}\n${text.bodyLabels.phone}: ${form.phone}\n\n${text.bodyLabels.message}:\n${form.message}`
     );
     window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
     setSubmitted(true);
@@ -44,9 +95,9 @@ export function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-navy">Thank you!</h3>
+        <h3 className="text-xl font-semibold text-navy">{text.thankYou}</h3>
         <p className="mt-2 text-muted">
-          Your email client should open shortly. If it doesn&apos;t, reach us directly at{" "}
+          {text.success}{" "}
           <a href={`mailto:${siteConfig.email}`} className="text-accent hover:underline">
             {siteConfig.email}
           </a>
@@ -63,7 +114,7 @@ export function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="company" className="mb-1.5 block text-sm font-medium text-navy">
-            Company
+            {text.company}
           </label>
           <input
             id="company"
@@ -72,12 +123,12 @@ export function ContactForm() {
             value={form.company}
             onChange={(e) => updateField("company", e.target.value)}
             className={inputClass}
-            placeholder="Your company name"
+            placeholder={text.companyPlaceholder}
           />
         </div>
         <div>
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-navy">
-            Contact Name
+            {text.name}
           </label>
           <input
             id="name"
@@ -86,7 +137,7 @@ export function ContactForm() {
             value={form.name}
             onChange={(e) => updateField("name", e.target.value)}
             className={inputClass}
-            placeholder="Your full name"
+            placeholder={text.namePlaceholder}
           />
         </div>
       </div>
@@ -94,7 +145,7 @@ export function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-navy">
-            Email
+            {text.email}
           </label>
           <input
             id="email"
@@ -108,7 +159,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-navy">
-            Phone
+            {text.phone}
           </label>
           <input
             id="phone"
@@ -123,7 +174,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-navy">
-          Message
+          {text.message}
         </label>
         <textarea
           id="message"
@@ -132,12 +183,12 @@ export function ContactForm() {
           value={form.message}
           onChange={(e) => updateField("message", e.target.value)}
           className={`${inputClass} resize-none`}
-          placeholder="Tell us about your operation and what you'd like to see in a demo..."
+          placeholder={text.messagePlaceholder}
         />
       </div>
 
       <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto">
-        Send Message
+        {text.submit}
       </Button>
     </form>
   );
