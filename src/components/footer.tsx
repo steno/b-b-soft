@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { navLinks, siteConfig } from "@/lib/content";
 import { Logo } from "@/components/logo";
-import { VantaNetBackground } from "@/components/vanta-net-background";
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="relative overflow-hidden bg-navy text-white">
-      <VantaNetBackground variant="footer" fallbackClassName="bg-navy" />
+      <div className="pointer-events-none absolute inset-0 gradient-mesh opacity-60" aria-hidden="true" />
       <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">

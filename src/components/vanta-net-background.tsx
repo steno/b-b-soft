@@ -21,24 +21,24 @@ const TEAL = 0x14b8a6;
 const THREE_CDN =
   "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
 const VANTA_NET_CDN =
-  "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js";
+  "https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js";
 
 const variantConfig = {
   hero: {
-    points: 14,
-    maxDistance: 24,
-    spacing: 17,
+    points: 9,
+    maxDistance: 20,
+    spacing: 20,
     showDots: true,
-    mouseControls: true,
-    touchControls: true,
+    mouseControls: false,
+    touchControls: false,
     backgroundAlpha: 0.35,
     opacity: 0.85,
   },
   footer: {
-    points: 10,
-    maxDistance: 18,
-    spacing: 20,
-    showDots: true,
+    points: 8,
+    maxDistance: 16,
+    spacing: 22,
+    showDots: false,
     mouseControls: false,
     touchControls: false,
     backgroundAlpha: 0.45,
@@ -88,23 +88,47 @@ export function VantaNetBackground({
   variant = "hero",
   fallbackClassName = "gradient-mesh",
 }: VantaNetBackgroundProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const effectRef = useRef<{ destroy: () => void } | null>(null);
+  const isVisibleRef = useRef(false);
+  const isInitializingRef = useRef(false);
 
   useEffect(() => {
+    const root = rootRef.current;
     const container = containerRef.current;
-    if (!container || shouldUseFallback()) return;
+    if (!root || !container || shouldUseFallback()) return;
 
     let active = true;
     const { opacity, backgroundAlpha, ...config } = variantConfig[variant];
 
-    async function initVanta() {
+    function destroyEffect() {
+      effectRef.current?.destroy();
+      effectRef.current = null;
+    }
+
+    async function createEffect() {
+      if (
+        !active ||
+        !isVisibleRef.current ||
+        document.hidden ||
+        effectRef.current ||
+        isInitializingRef.current ||
+        !containerRef.current
+      ) {
+        return;
+      }
+
+      isInitializingRef.current = true;
+
       try {
         await loadScript(THREE_CDN, "bbsoft-three");
         await loadScript(VANTA_NET_CDN, "bbsoft-vanta-net");
 
         if (
           !active ||
+          !isVisibleRef.current ||
+          document.hidden ||
           !containerRef.current ||
           !window.THREE ||
           !window.VANTA?.NET
@@ -112,7 +136,6 @@ export function VantaNetBackground({
           return;
         }
 
-        effectRef.current?.destroy();
         effectRef.current = window.VANTA.NET({
           el: containerRef.current,
           THREE: window.THREE,
@@ -130,23 +153,48 @@ export function VantaNetBackground({
         containerRef.current.style.opacity = String(opacity);
       } catch (error) {
         console.error("Vanta NET failed to initialize:", error);
+      } finally {
+        isInitializingRef.current = false;
       }
     }
 
-    const frame = requestAnimationFrame(() => {
-      initVanta();
-    });
+    function syncEffect() {
+      if (isVisibleRef.current && !document.hidden) {
+        void createEffect();
+      } else {
+        destroyEffect();
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry?.isIntersecting ?? false;
+        syncEffect();
+      },
+      { threshold: 0.05, rootMargin: "50px" },
+    );
+
+    const onVisibilityChange = () => {
+      syncEffect();
+    };
+
+    observer.observe(root);
+    document.addEventListener("visibilitychange", onVisibilityChange);
 
     return () => {
       active = false;
-      cancelAnimationFrame(frame);
-      effectRef.current?.destroy();
-      effectRef.current = null;
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      destroyEffect();
     };
   }, [variant]);
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+    <div
+      ref={rootRef}
+      className="pointer-events-none absolute inset-0 z-0"
+      aria-hidden="true"
+    >
       <div className={`absolute inset-0 ${fallbackClassName}`} />
       <div ref={containerRef} className="absolute inset-0 z-[1]" />
     </div>

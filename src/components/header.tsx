@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { navLinks } from "@/lib/content";
 import { siteContainerClass } from "@/lib/layout";
@@ -14,6 +14,8 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const lockedScrollY = useRef(0);
+  const skipScrollRestore = useRef(false);
 
   const showSolidHeader = scrolled || mobileOpen;
 
@@ -30,16 +32,22 @@ export function Header() {
 
   useEffect(() => {
     setMobileOpen(false);
+    window.scrollTo(0, 0);
   }, [pathname]);
+
+  function closeMenuForNavigation() {
+    skipScrollRestore.current = true;
+    setMobileOpen(false);
+  }
 
   useEffect(() => {
     if (!mobileOpen) return;
 
-    const scrollY = window.scrollY;
+    lockedScrollY.current = window.scrollY;
     const { style } = document.body;
 
     style.position = "fixed";
-    style.top = `-${scrollY}px`;
+    style.top = `-${lockedScrollY.current}px`;
     style.left = "0";
     style.right = "0";
     style.width = "100%";
@@ -52,7 +60,12 @@ export function Header() {
       style.right = "";
       style.width = "";
       style.overflow = "";
-      window.scrollTo(0, scrollY);
+
+      if (skipScrollRestore.current) {
+        skipScrollRestore.current = false;
+      } else {
+        window.scrollTo(0, lockedScrollY.current);
+      }
     };
   }, [mobileOpen]);
 
@@ -162,7 +175,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={closeMenuForNavigation}
                     className={`rounded-xl px-4 py-3 text-lg font-medium transition-colors ${
                       active
                         ? "bg-white/15 text-accent-light"
@@ -174,7 +187,12 @@ export function Header() {
                 );
               })}
               <div className="mt-4 border-t border-white/10 pt-4">
-                <Button href="/contact" variant="primary" className="w-full">
+                <Button
+                  href="/contact"
+                  variant="primary"
+                  className="w-full"
+                  onClick={closeMenuForNavigation}
+                >
                   Request Demo
                 </Button>
               </div>
