@@ -43,15 +43,17 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="animate-fade-up animation-delay-200 pointer-events-none flex justify-center lg:justify-end lg:pr-20 xl:pr-32 2xl:pr-40">
-              <Image
-                src={assetPath("/anna-glow.png")}
-                alt="Anna, BB Soft representative"
-                width={567}
-                height={832}
-                priority
-                className="h-56 w-auto object-contain object-bottom sm:h-72 md:h-80 lg:h-[min(68vh,720px)] xl:h-[min(72vh,832px)]"
-              />
+            <div className="pointer-events-none flex justify-center lg:justify-end lg:pr-20 xl:pr-32 2xl:pr-40">
+              <div className="h-48 overflow-hidden sm:h-60 md:h-[17rem] lg:h-[min(58vh,620px)] xl:h-[min(62vh,720px)]">
+                <Image
+                  src={assetPath("/anna-glow.png")}
+                  alt="Anna, BB Soft representative"
+                  width={567}
+                  height={832}
+                  priority
+                  className="h-[115%] w-auto max-w-none object-cover object-top"
+                />
+              </div>
             </div>
           </div>
 
