@@ -93,7 +93,6 @@ export function VantaNetBackground({
   const effectRef = useRef<{ destroy: () => void } | null>(null);
   const isVisibleRef = useRef(false);
   const isInitializingRef = useRef(false);
-  const mobileMotionClassName = variant === "hero" ? "mobile-gradient-motion" : "";
 
   useEffect(() => {
     const root = rootRef.current;
@@ -196,8 +195,11 @@ export function VantaNetBackground({
       className="pointer-events-none absolute inset-0 z-0"
       aria-hidden="true"
     >
-      <div className={`absolute inset-0 ${fallbackClassName} ${mobileMotionClassName}`} />
+      <div className={`absolute inset-0 ${fallbackClassName}`} />
       <div ref={containerRef} className="absolute inset-0 z-[1]" />
+      {variant === "hero" && (
+        <div className="mobile-hero-motion absolute inset-0 z-[2] md:hidden" />
+      )}
     </div>
   );
 }
