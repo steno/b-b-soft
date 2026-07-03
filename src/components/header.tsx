@@ -56,10 +56,11 @@ export function Header() {
     };
   }, [mobileOpen]);
 
-  // On mobile, always use solid white when scrolled — backdrop-blur breaks the menu overlay.
-  const headerSurface = mobileOpen || scrolled
-    ? "bg-white shadow-sm border-b border-border lg:bg-white/90 lg:backdrop-blur-lg"
-    : "bg-transparent";
+  const headerSurface = mobileOpen
+    ? "glass-dark border-b border-white/10 shadow-lg shadow-navy/30"
+    : scrolled
+      ? "bg-white shadow-sm border-b border-border lg:bg-white/90 lg:backdrop-blur-lg"
+      : "bg-transparent";
 
   return (
     <>
@@ -107,9 +108,11 @@ export function Header() {
           <button
             type="button"
             className={`lg:hidden rounded-lg p-2 transition-colors ${
-              showSolidHeader
-                ? "text-navy hover:bg-slate-100"
-                : "text-white hover:bg-white/10"
+              mobileOpen
+                ? "text-white hover:bg-white/10"
+                : showSolidHeader
+                  ? "text-navy hover:bg-slate-100"
+                  : "text-white hover:bg-white/10"
             }`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
@@ -147,8 +150,7 @@ export function Header() {
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="lg:hidden fixed inset-0 z-[240] bg-white"
-            style={{ backgroundColor: "#ffffff" }}
+            className="glass-dark lg:hidden fixed inset-0 z-[240]"
           >
             <nav
               className={`${siteContainerClass} flex min-h-dvh flex-col gap-1 overflow-y-auto pb-8 pt-24`}
@@ -163,15 +165,15 @@ export function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={`rounded-xl px-4 py-3 text-lg font-medium transition-colors ${
                       active
-                        ? "bg-primary/10 text-primary"
-                        : "text-slate-700 hover:bg-slate-100"
+                        ? "bg-white/15 text-white"
+                        : "text-white/85 hover:bg-white/10 hover:text-white"
                     }`}
                   >
                     {link.label}
                   </Link>
                 );
               })}
-              <div className="mt-4 border-t border-border pt-4">
+              <div className="mt-4 border-t border-white/15 pt-4">
                 <Button href="/contact" variant="primary" className="w-full">
                   Request Demo
                 </Button>
