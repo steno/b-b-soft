@@ -7,6 +7,7 @@ export const siteConfig = {
   phoneHref: "tel:+15633284723",
   email: "info@b-b-soft.com",
   url: "https://steno.github.io/b-b-soft",
+  basePath: "/b-b-soft",
 };
 
 export const navLinks = [
