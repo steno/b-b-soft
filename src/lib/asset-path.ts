@@ -14,3 +14,13 @@ export function assetPath(path: string): string {
   const separator = url.includes("?") ? "&" : "?";
   return `${url}${separator}v=${buildId}`;
 }
+
+/** Absolute URL for Open Graph, Twitter, and other social crawlers. */
+export function absoluteAssetUrl(path: string): string {
+  const relative = assetPath(path);
+  if (relative.startsWith("http://") || relative.startsWith("https://")) {
+    return relative;
+  }
+
+  return new URL(relative, siteConfig.url).href;
+}
