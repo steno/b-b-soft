@@ -19,7 +19,7 @@ export default function HomePage() {
         <VantaNetBackground variant="hero" />
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMS41Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50" />
         <div className={`relative z-10 ${siteContainerClass} py-32 lg:py-40`}>
-          <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-4 xl:gap-8">
+          <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14 xl:gap-20">
             <div className="max-w-3xl">
               <p className="animate-fade-up mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-sm text-eyebrow">
                 <SparklesIcon className="h-4 w-4 text-eyebrow" />
@@ -43,7 +43,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="animate-fade-up animation-delay-200 pointer-events-none flex justify-center lg:justify-end">
+            <div className="animate-fade-up animation-delay-200 pointer-events-none flex justify-center lg:justify-end lg:pr-20 xl:pr-32 2xl:pr-40">
               <Image
                 src={assetPath("/anna-glow.png")}
                 alt="Anna, BB Soft representative"
