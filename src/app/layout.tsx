@@ -31,6 +31,11 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     siteName: siteConfig.name,
     type: "website",
+    images: [{ url: "/bbsoftlogo.png", alt: "BB Soft" }],
+  },
+  icons: {
+    icon: "/bbsoftlogo.png",
+    apple: "/bbsoftlogo.png",
   },
 };
 

@@ -4,8 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { navLinks, siteConfig } from "@/lib/content";
+import { navLinks } from "@/lib/content";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/logo";
 
 export function Header() {
   const pathname = usePathname();
@@ -65,23 +66,8 @@ export function Header() {
         className={`fixed inset-x-0 top-0 z-[250] ${mobileOpen ? "" : "transition-colors duration-300"} ${headerSurface}`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <Link href="/" className="group flex items-center gap-3">
-            <span
-              className={`flex h-10 w-10 items-center justify-center rounded-xl font-bold text-sm transition-colors ${
-                showSolidHeader
-                  ? "bg-primary text-white"
-                  : "bg-white/15 text-white backdrop-blur-sm"
-              }`}
-            >
-              BB
-            </span>
-            <span
-              className={`text-xl font-bold tracking-tight transition-colors ${
-                showSolidHeader ? "text-navy" : "text-white"
-              }`}
-            >
-              {siteConfig.name}
-            </span>
+          <Link href="/" className="group flex items-center">
+            <Logo priority className="h-9 sm:h-10" />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">

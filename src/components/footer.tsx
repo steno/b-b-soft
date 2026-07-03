@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { navLinks, siteConfig } from "@/lib/content";
+import { Logo } from "@/components/logo";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -9,11 +10,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent font-bold text-sm text-white">
-                BB
-              </span>
-              <span className="text-xl font-bold">{siteConfig.name}</span>
+            <Link href="/" className="inline-flex">
+              <Logo className="h-10" />
             </Link>
             <p className="mt-4 max-w-md text-slate-300 leading-relaxed">
               {siteConfig.description}
