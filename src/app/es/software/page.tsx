@@ -30,6 +30,7 @@ export default function SpanishSoftwarePage() {
           eyebrow="Capacidades principales"
           title="Todo lo que tu operación necesita"
           description="Construido sobre WinDev, WinDev Mobile y WebDev, con Microsoft SQL Server en el núcleo."
+          centered
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {softwareFeaturesEs.map((feature) => (

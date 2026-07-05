@@ -30,6 +30,7 @@ export default function SoftwarePage() {
           eyebrow="Core Capabilities"
           title="Everything your operation needs"
           description="Built on WinDev, WinDev Mobile, and WebDev with Microsoft SQL Server at the core."
+          centered
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {softwareFeatures.map((feature) => (
