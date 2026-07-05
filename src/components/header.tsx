@@ -15,7 +15,6 @@ import {
 import { siteContainerClass } from "@/lib/layout";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
-import { MobileHeroMotion } from "@/components/mobile-hero-motion";
 
 export function Header() {
   const pathname = usePathname();
@@ -83,7 +82,7 @@ export function Header() {
   }, [mobileOpen]);
 
   const headerSurface = mobileOpen
-    ? "bg-transparent border-b border-white/10"
+    ? "menu-overlay border-b border-white/10 shadow-lg"
     : scrolled
       ? "bg-white shadow-sm border-b border-border lg:bg-white/90 lg:backdrop-blur-lg"
       : "bg-transparent";
@@ -186,11 +185,10 @@ export function Header() {
             role="dialog"
             aria-modal="true"
             aria-label={text.mobileNavigation}
-            className="gradient-mesh relative overflow-hidden lg:hidden fixed inset-0 z-[240]"
+            className="menu-overlay lg:hidden fixed inset-0 z-[240]"
           >
-            <MobileHeroMotion alwaysShow className="z-0" />
             <nav
-              className={`relative z-10 ${siteContainerClass} flex min-h-dvh flex-col gap-1 overflow-y-auto pb-8 pt-24`}
+              className={`${siteContainerClass} flex min-h-dvh flex-col gap-1 overflow-y-auto pb-8 pt-24`}
               aria-label="Mobile"
             >
               {navLinks.map((link) => {
